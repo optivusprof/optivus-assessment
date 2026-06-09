@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optivus · Company Strategy & Marketing Outside-In Assessment</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--g:#10B981;--g2:#065F46;--r:#E05252;--am:#D4872B;--bl:#3A7BD5;--bg2:#F4FAF7;--bg3:#EAF5EF;--bd:#D0E8DE;--bd2:#E0EDE8;--tx:#1A3328;--tx2:#3D5A50;--tx3:#6B9980;}
+html,body{font-family:'DM Sans',system-ui,sans-serif;background:#fff;color:var(--tx);min-height:100vh;}
+#si,#sl{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;overflow-y:auto;}
+#si{background:#fff;z-index:10;}
+#sl{background:#060E09;z-index:10;display:none;}
+#sr{display:none;background:#fff;min-height:100vh;}
+.firm{font-family:monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:22px;text-align:center;}
+.ttl{font-size:clamp(26px,5vw,52px);font-weight:700;text-align:center;line-height:1.05;color:#060E09;margin-bottom:10px;}
+.ttl em{font-style:italic;color:var(--g);}
+.sub{font-size:14px;color:var(--tx2);text-align:center;max-width:440px;line-height:1.65;margin-bottom:32px;}
+.card{background:var(--bg2);border:1px solid rgba(16,185,129,.25);border-radius:6px;padding:28px;width:100%;max-width:560px;position:relative;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--g),transparent);border-radius:6px 6px 0 0;}
+.fl{margin-bottom:15px;}
+.lbl{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--g2);font-weight:700;margin-bottom:5px;}
+.inp{width:100%;background:#fff;border:1px solid rgba(6,95,70,.2);border-radius:4px;padding:11px 13px;font-family:inherit;font-size:14px;color:#060E09;outline:none;transition:border-color .2s;}
+.inp:focus{border-color:var(--g);}
+.inp::placeholder{color:#9BB8AE;}
+textarea.inp{resize:vertical;min-height:60px;}
+.btn-run{width:100%;background:var(--g);color:#fff;border:none;border-radius:4px;padding:13px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-top:4px;transition:background .2s;}
+.btn-run:hover{background:var(--g2);}
+.ierr{display:none;background:rgba(224,82,82,.08);border:1px solid rgba(224,82,82,.3);border-radius:4px;padding:10px;font-size:13px;color:#C0392B;margin-top:8px;line-height:1.6;}
+.lco{font-family:monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:36px;}
+.lnm{font-size:clamp(20px,4vw,36px);font-weight:700;color:#fff;margin-bottom:7px;text-align:center;}
+.llbl{font-size:13px;color:#6B9980;margin-bottom:32px;}
+.pt{width:100%;max-width:400px;margin-bottom:14px;}
+.step{display:flex;align-items:center;gap:11px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);opacity:.3;transition:opacity .4s;}
+.step.active{opacity:1;}.step.done{opacity:.55;}
+.sd{width:6px;height:6px;border-radius:50%;background:#6B9980;flex-shrink:0;transition:background .3s;}
+.step.active .sd{background:var(--g);box-shadow:0 0 8px rgba(16,185,129,.5);}
+.step.done .sd{background:var(--g);}
+.stxt{font-size:13px;color:#E8F5F0;flex:1;}
+.sst{font-family:monospace;font-size:10px;color:#6B9980;}
+.step.active .sst{color:var(--g);}.step.done .sst{color:var(--g);}
+#smsg{font-family:monospace;font-size:11px;color:var(--g);margin-top:6px;text-align:center;min-height:16px;max-width:400px;}
+.ebox{display:none;background:rgba(214,73,51,.1);border:1px solid rgba(214,73,51,.4);border-radius:4px;padding:14px 18px;max-width:400px;margin-top:16px;text-align:center;}
+.ebox p{font-size:13px;color:#F08070;line-height:1.6;margin-bottom:10px;}
+.btn-s{background:#fff;border:1px solid var(--bd);color:var(--tx);padding:7px 13px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .2s;}
+.btn-s:hover{border-color:var(--g);color:var(--g);}
+.rpt{max-width:980px;margin:0 auto;padding:48px 32px 100px;}
+.cov{border-bottom:1px solid var(--bd2);padding-bottom:44px;margin-bottom:52px;}
+.ey{font-family:monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+.ey::after{content:'';flex:1;height:1px;background:var(--bd2);}
+.co{font-size:clamp(32px,5vw,60px);font-weight:900;color:#060E09;line-height:1;margin-bottom:10px;}
+.ctit{font-size:clamp(14px,2vw,18px);font-style:italic;color:var(--g);margin-bottom:22px;}
+.mt{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:32px;}
+.mi{display:flex;flex-direction:column;gap:3px;}
+.ml{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3);font-weight:600;}
+.mv{font-size:13px;color:var(--tx);font-weight:500;}
+.vd{background:var(--bg2);border:1px solid rgba(16,185,129,.2);border-left:4px solid var(--g);padding:16px 20px;border-radius:0 4px 4px 0;}
+.vdl{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--g);margin-bottom:6px;font-weight:600;}
+.vdt{font-size:14px;line-height:1.65;color:var(--tx);}
+.scard{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--bd);margin:30px 0;border:1px solid var(--bd);}
+.scc{background:var(--bg2);padding:14px 10px;text-align:center;}
+.scd{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:6px;line-height:1.35;}
+.scn{font-size:26px;font-weight:700;line-height:1;margin-bottom:4px;}
+.scb{height:3px;background:var(--bd);border-radius:2px;overflow:hidden;margin-top:5px;}
+.scf{height:100%;border-radius:2px;}
+.red{color:var(--r);}.amb{color:var(--am);}.grn{color:var(--g);}.blu{color:var(--bl);}
+.fr{background:var(--r);}.fa{background:var(--am);}.fg{background:var(--g);}.fb{background:var(--bl);}
+.sec{margin-bottom:56px;padding-bottom:56px;border-bottom:1px solid var(--bd2);}
+.sec:last-child{border-bottom:none;}
+.sh{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;flex-wrap:wrap;}
+.sn{font-family:monospace;font-size:10px;letter-spacing:.14em;color:var(--g);font-weight:500;}
+.stl{font-size:clamp(17px,2.5vw,24px);font-weight:700;color:#060E09;line-height:1.15;}
+.bdg{margin-left:auto;font-family:monospace;font-size:16px;font-weight:500;padding:3px 8px;border-radius:3px;}
+.bdr{color:var(--r);background:rgba(224,82,82,.1);}.bda{color:var(--am);background:rgba(212,135,43,.1);}
+.bdg2{color:var(--g);background:rgba(16,185,129,.1);}.bdb{color:var(--bl);background:rgba(58,123,213,.1);}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0;}
+.fc{background:var(--bg2);border:1px solid var(--bd);border-radius:4px;padding:14px;}
+.fl2{font-size:9px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;margin-bottom:7px;}
+.fls{color:var(--g);}.flr{color:var(--am);}
+.fc p{font-size:12px;line-height:1.65;color:var(--tx);margin-bottom:3px;}
+.bp{font-size:13px;line-height:1.8;color:var(--tx);margin-bottom:11px;}
+.fi{font-style:italic;border-left:3px solid var(--g);padding-left:11px;margin-bottom:16px;}
+.pl{list-style:none;margin:11px 0;}
+.pi{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--bd2);align-items:flex-start;font-size:12px;line-height:1.6;color:var(--tx);}
+.pi:last-child{border-bottom:none;}
+.ptg{flex-shrink:0;font-family:monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;padding:2px 6px;border-radius:2px;margin-top:2px;}
+.th1{background:rgba(224,82,82,.12);color:var(--r);}.th2{background:rgba(212,135,43,.12);color:var(--am);}.th3{background:rgba(16,185,129,.12);color:var(--g);}
+.ct{width:100%;border-collapse:collapse;font-size:12px;margin:14px 0;}
+.ct th{text-align:left;padding:7px 10px;background:var(--bg3);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--g2);font-weight:700;border-bottom:1px solid var(--bd);}
+.ct td{padding:8px 10px;border-bottom:1px solid var(--bd2);color:var(--tx);vertical-align:top;line-height:1.55;}
+.ct tr:last-child td{border-bottom:none;}
+.rc{border:1px solid rgba(16,185,129,.25);border-radius:4px;overflow:hidden;margin:14px 0;}
+.rch{background:var(--bg3);padding:9px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd);}
+.rct{font-size:11px;font-weight:600;color:var(--g2);}
+.rci{font-family:monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);}
+.rcb{padding:11px 14px;background:#fff;}
+.rcb p{font-size:12px;line-height:1.7;color:var(--tx);}
+.pq{border-left:3px solid var(--g);padding:11px 16px;margin:14px 0;background:var(--bg2);}
+.pq p{font-size:15px;font-style:italic;line-height:1.55;color:var(--g2);font-weight:500;}
+.g2x2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0;}
+.box{background:var(--bg2);border:1px solid var(--bd);border-radius:4px;padding:14px;}
+.boxl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--g);font-weight:700;margin-bottom:6px;}
+.box p{font-size:12px;color:var(--tx);line-height:1.55;}
+.mw{background:var(--bg3);border-left:4px solid var(--g);padding:14px;border-radius:0 4px 4px 0;}
+.rl{background:#FFF5F5;border-left:4px solid var(--r);padding:14px;border-radius:0 4px 4px 0;}
+.mwl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);font-weight:700;margin-bottom:6px;}
+.rll{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--r);font-weight:700;margin-bottom:6px;}
+.som{background:#065F46;border-radius:4px;padding:14px;text-align:center;}
+.som .boxl{color:#34D399;}.som p{color:#E8F5F0;}
+.kpi{border:1px solid var(--bd);border-radius:4px;overflow:hidden;margin-bottom:11px;}
+.kpih{background:#065F46;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;}
+.kpih span:first-child{font-size:12px;font-weight:700;color:#fff;}
+.kpih span:last-child{font-family:monospace;font-size:10px;color:#34D399;}
+.kpig{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd);}
+.kpic{background:#F4FAF7;padding:10px 12px;}
+.kpicl{font-size:9px;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+.kpicv{font-size:12px;font-weight:600;color:var(--tx);}
+.kpirl{background:#FFF5F5;}
+.kpirl .kpicl{color:var(--r);}.kpirl .kpicv{color:var(--r);}
+.kpiw{font-size:11px;font-style:italic;color:var(--tx3);padding:8px 14px;border-top:1px solid var(--bd2);background:#fff;}
+.abar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--g);padding:11px 32px;display:none;align-items:center;justify-content:space-between;z-index:100;box-shadow:0 -4px 16px rgba(6,95,70,.08);}
+.abar.on{display:flex;}
+.aco{font-size:13px;font-weight:700;color:#060E09;}
+.adt{font-size:10px;color:var(--tx3);font-family:monospace;}
+.abtns{display:flex;gap:7px;}
+.btn-pr{background:var(--g);border:none;color:#fff;padding:7px 14px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;}
+.btn-pr:hover{background:var(--g2);}
+@media print{.abar,#si,#sl{display:none!important;}#sr{display:block!important;}}
+@media(max-width:500px){.scard{grid-template-columns:repeat(3,1fr);}.fg2,.g2x2{grid-template-columns:1fr;}.g3{grid-template-columns:1fr 1fr;}.rpt{padding:24px 14px 80px;}.abar{padding:9px 14px;}}
+</style>
+</head>
+<body>
+
+<div id="si">
+  <p class="firm">OPTIVUS · STRATEGIC INTELLIGENCE ENGINE</p>
+  <h1 class="ttl"><span>Company</span><br><em>Strategy &amp; Marketing</em><br><span>Outside-In Assessment</span></h1>
+  <p class="sub">Board-grade 12-section strategic assessment. Enter a company URL and tap Run.</p>
+  <div class="card">
+    <div class="fl"><label class="lbl">Company Website URL</label><input class="inp" type="text" id="furl" placeholder="www.company.com"></div>
+    <div class="fl"><label class="lbl">Company Name</label><input class="inp" type="text" id="fname" placeholder="Company Name"></div>
+    <div class="fl"><label class="lbl">Additional Context (optional)</label><textarea class="inp" id="fctx" placeholder="Industry, stage, competitors, investor context…"></textarea></div>
+    <div class="fl"><label class="lbl">Assessor / Client Name (optional)</label><input class="inp" type="text" id="fassesor" placeholder="Dean Reid — Optivus"></div>
+    <div class="fl" id="apiKeyField">
+      <label class="lbl">Anthropic API Key <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--tx3);">— required for standalone use</span></label>
+      <input class="inp" type="password" id="fapikey" placeholder="sk-ant-api03-..." autocomplete="off">
+      <div style="font-size:11px;color:var(--tx3);margin-top:4px;">Your key is used only for this session and never stored. Get one at <a href="https://console.anthropic.com" target="_blank" style="color:var(--g);">console.anthropic.com</a></div>
+    </div>
+    <button class="btn-run" id="btnRun">RUN STRATEGIC ASSESSMENT →</button>
+    <div class="ierr" id="ierr"></div>
+  </div>
+</div>
+
+<div id="sl">
+  <p class="lco">OPTIVUS · STRATEGIC INTELLIGENCE ENGINE</p>
+  <h2 class="lnm" id="lnm"></h2>
+  <p class="llbl">Strategic Assessment In Progress</p>
+  <div class="pt">
+    <div class="step" id="st1"><span class="sd"></span><span class="stxt">Profiling company from public sources</span><span class="sst">QUEUED</span></div>
+    <div class="step" id="st2"><span class="sd"></span><span class="stxt">Mapping competitive landscape</span><span class="sst">QUEUED</span></div>
+    <div class="step" id="st3"><span class="sd"></span><span class="stxt">Evaluating positioning &amp; messaging</span><span class="sst">QUEUED</span></div>
+    <div class="step" id="st4"><span class="sd"></span><span class="stxt">Analysing GTM &amp; demand generation</span><span class="sst">QUEUED</span></div>
+    <div class="step" id="st5"><span class="sd"></span><span class="stxt">Scoring pricing &amp; economics</span><span class="sst">QUEUED</span></div>
+    <div class="step" id="st6"><span class="sd"></span><span class="stxt">Synthesising board-grade report</span><span class="sst">QUEUED</span></div>
+  </div>
+  <p id="smsg"></p>
+  <div class="ebox" id="ebox">
+    <p id="etxt"></p>
+    <button class="btn-run" id="btnRetry" style="width:auto;padding:9px 20px;font-size:11px;margin-right:7px;">RETRY →</button>
+    <button class="btn-s" id="btnSo1">← Start Over</button>
+  </div>
+</div>
+
+<div id="sr"><div class="rpt" id="rpt"></div></div>
+
+<div class="abar" id="abar">
+  <div><div class="aco" id="aco"></div><div class="adt" id="adt"></div></div>
+  <div class="abtns">
+    <button class="btn-s" id="btnSo2">← New Assessment</button>
+    <button class="btn-pr" id="btnPr">Print / Save PDF</button>
+  </div>
+</div>
+
+<script>
+var SYSP='You are a Tier-1 Management Consultant (McKinsey/Bain Partner) advising a CEO and Board. Return ONLY valid JSON. No markdown fences. Plain strings only. Every observation links to valuation, capital efficiency, or competitive asymmetry. Named executive owners on every recommendation. Score labels: CRITICAL/WEAK/FAIR/STRONG/EXCELLENT.';
+var _params={},_timers=[];
+
+function g(id){return document.getElementById(id);}
+function esc(s){if(s==null)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function cl(n){n=parseInt(n);return(!n||isNaN(n))?5:Math.min(10,Math.max(1,n));}
+function scl(n){return cl(n)<=3?'red':cl(n)<=5?'amb':cl(n)<=7?'blu':'grn';}
+function scf(n){return cl(n)<=3?'fr':cl(n)<=5?'fa':cl(n)<=7?'fb':'fg';}
+function bc(n){if(n===null||n===undefined)return'bdb';return cl(n)<=3?'bdr':cl(n)<=5?'bda':cl(n)<=7?'bdb':'bdg2';}
+function rc(n){return cl(n)<=3?'var(--r)':cl(n)<=5?'var(--am)':cl(n)<=7?'var(--bl)':'var(--g)';}
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
+function setS(m){var e=g('smsg');if(e)e.textContent=m;}
+
+function show(id){
+  g('si').style.display='none';
+  g('sl').style.display='none';
+  g('sr').style.display='none';
+  g('abar').className='abar';
+  if(id==='si')g('si').style.display='flex';
+  else if(id==='sl')g('sl').style.display='flex';
+  else if(id==='sr'){g('sr').style.display='block';g('abar').className='abar on';}
+  window.scrollTo(0,0);
+}
+
+function stepSet(n,st){var e=g('st'+n);if(!e)return;e.className='step'+(st?' '+st:'');e.querySelector('.sst').textContent=st==='active'?'RUNNING':st==='done'?'DONE':'QUEUED';}
+function resetSteps(){_timers.forEach(clearTimeout);_timers=[];for(var i=1;i<=6;i++)stepSet(i,'');}
+function runProgress(){
+  resetSteps();
+  [{n:1,d:0,dur:7000},{n:2,d:6000,dur:7000},{n:3,d:12000,dur:8000},{n:4,d:19000,dur:7000},{n:5,d:25000,dur:7000}].forEach(function(x){
+    _timers.push(setTimeout(function(){stepSet(x.n,'active');_timers.push(setTimeout(function(){stepSet(x.n,'done');},x.dur));},x.d));
+  });
+  _timers.push(setTimeout(function(){stepSet(6,'active');},32000));
+}
+function doneProgress(){stepSet(6,'done');}
+
+function showErr(m){g('etxt').textContent=m;g('ebox').style.display='block';setS('');}
+
+function parseJ(raw){
+  var s=raw.replace(/^```json\s*/im,'').replace(/^```\s*/im,'').replace(/```\s*$/m,'').trim();
+  var si=s.indexOf('{');if(si>0)s=s.slice(si);
+  try{return JSON.parse(s);}catch(e){}
+  var o='',inS=false,es=false;
+  for(var i=0;i<s.length;i++){var c=s[i];if(es){o+=c;es=false;continue;}if(c==='\\'&&inS){o+=c;es=true;continue;}if(c==='"'){inS=!inS;o+=c;continue;}if(inS){if(c==='\u2018'||c==='\u2019'){o+="'";continue;}if(c==='\u201C'||c==='\u201D'){o+="'";continue;}if(c==='\u2014'||c==='\u2013'){o+='--';continue;}if(c==='\n'){o+='\\n';continue;}if(c==='\r')continue;}o+=c;}
+  try{return JSON.parse(o);}catch(e){}
+  try{var rep=o.replace(/,\s*"[^"]*":\s*"[^"]*$/,'').replace(/,\s*"[^"]*":\s*[{\[]$/,'').replace(/,\s*"[^"]*"\s*$/,'').replace(/,\s*$/,'');var br=0,bk=0,iS=false,eS=false;for(var ci=0;ci<rep.length;ci++){var ch=rep[ci];if(eS){eS=false;continue;}if(ch==='\\'&&iS){eS=true;continue;}if(ch==='"'){iS=!iS;continue;}if(iS)continue;if(ch==='{')br++;if(ch==='}')br--;if(ch==='[')bk++;if(ch===']')bk--;}rep+=']'.repeat(Math.max(0,bk))+'}' .repeat(Math.max(0,br));return JSON.parse(rep);}catch(e){throw new Error('Parse failed: '+e.message);}
+}
+
+async function callAPI(prompt,attempt){
+  attempt=attempt||0;
+  try{
+    setS('Calling API (attempt '+(attempt+1)+')...');
+    var apiKey=window._apiKey||'';
+    var reqBody=JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,system:SYSP,messages:[{role:'user',content:prompt}]});
+    var r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
+      body:reqBody
+    });
+    if((r.status===529||r.status===429)&&attempt<4){var w=Math.pow(2,attempt)*3000;setS('Overloaded, retrying in '+Math.round(w/1000)+'s...');await sleep(w);return callAPI(prompt,attempt+1);}
+    if(!r.ok){var e=await r.json().catch(function(){return{};});throw new Error((e&&e.error&&e.error.message)||'API error '+r.status);}
+    var d=await r.json();
+    var raw=d.content&&d.content.find(function(b){return b.type==='text';});
+    return parseJ(raw?raw.text:'');
+  }catch(e){
+    if(attempt<3){setS('Retrying... ('+e.message+')');await sleep(3000);return callAPI(prompt,attempt+1);}
+    throw e;
+  }
+}
+
+function p1(co,url,ctx){
+  var dt=new Date().toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+  return 'Board-grade strategic assessment of '+co+' ('+url+'). Context: '+(ctx||'none')+'.\nReturn ONLY this JSON — replace every placeholder with real analysis of '+co+':\n{"company":"'+co+'","url":"'+url+'","assessment_date":"'+dt+'","overall_verdict":"3 sentences: market context + asymmetric advantage or liability + one move that changes everything.","overall_score":6,"scores":{"market_position":6,"positioning_clarity":5,"gtm_execution":5,"product_moat":7,"commercial_readiness":5},"sections":[{"num":"00","title":"Executive Investment Thesis","score":null,"score_label":"MANDATE","finding":"The asymmetric bet in one sentence.","investment_thesis":{"market_context":"specific force creating window now","asymmetric_advantage":"'+co+"'s one hard-to-replicate advantage\",\"required_capital_allocation\":\"specific allocation needed\",\"outcome_18_months\":\"concrete measurable outcome\",\"market_window\":\"Open/Closing/Closed and why\",\"red_line\":\"single failure mode that kills company in 12 months\"},\"body\":\"3 paragraphs on value asymmetry, position, cost of inaction.\"},\n{\"num\":\"01\",\"title\":\"Company Profile & Commercial Stage\",\"score\":6,\"score_label\":\"FAIR\",\"finding\":\"Core commercial reality.\",\"strengths\":[\"specific strength\",\"specific strength\"],\"risks\":[\"specific risk\",\"specific risk\"],\"body\":\"2 paragraphs on stage and team gaps.\",\"recommendation\":\"Directive with owner.\"},\n{\"num\":\"02\",\"title\":\"Market Opportunity: TAM/SAM/SOM\",\"score\":7,\"score_label\":\"FAIR\",\"finding\":\"Is real opportunity larger or smaller than believed?\",\"strengths\":[\"...\"],\"risks\":[\"...\"],\"tam_sam_som\":{\"tam\":\"Bottom-up TAM with ICP logic\",\"sam\":\"Serviceable portion with current product\",\"som\":\"18-month capture target with math\",\"why_now\":\"Specific macro tailwind driving urgency\",\"market_window_closes\":\"Event that closes window\"},\"body\":\"2 paragraphs.\",\"recommendation\":\"...\"},\n{\"num\":\"03\",\"title\":\"Competitive Landscape\",\"score\":6,\"score_label\":\"FAIR\",\"finding\":\"Where is "+co+' differentiated vs deluding itself?","strengths":["..."],"risks":["..."],"body":"2 paragraphs.","competitors":[{"name":"real competitor","type":"Incumbent","threat":"High","note":"one-line insight"},{"name":"real competitor 2","type":"Challenger","threat":"Medium","note":"insight"},{"name":"real competitor 3","type":"Adjacent","threat":"Low","note":"insight"}],"recommendation":"..."},\n{"num":"04","title":"Positioning & Messaging","score":5,"score_label":"FAIR","finding":"Does messaging create pipeline or destroy it?","strengths":["..."],"risks":["..."],"body":"2 paragraphs.","from_to":[{"from":"current pattern","to":"required shift","rationale":"revenue impact"},{"from":"...","to":"...","rationale":"..."}],"recommendation":"..."},\n{"num":"05","title":"Economic Moat & Unit Economics","score":6,"score_label":"FAIR","finding":"Burn-to-grow or profitable-efficiency engine?","strengths":["..."],"risks":["..."],"unit_economics":{"ltv_cac_assessment":"estimated ratio and what it means","payback_period":"estimated payback","burn_profile":"mode assessment","retention_signal":"observable signals","switching_costs":"High/Medium/Low with rationale","capital_efficiency_verdict":"one sentence verdict"},"body":"2 paragraphs.","recommendation":"..."}]}';
+}
+
+function p2(co,url,ctx){
+  return 'Part 2 board assessment for '+co+' ('+url+'). Replace ALL placeholders with real analysis:\n{"sections":[{"num":"06","title":"Go-To-Market Strategy","score":5,"score_label":"FAIR","finding":"Is GTM matched to buyer and unit economics?","strengths":["..."],"risks":["..."],"body":"2 paragraphs on GTM motion and LTV/CAC.","recommendation":"Directive with owner and deadline."},{"num":"07","title":"Pricing Architecture","score":5,"score_label":"FAIR","finding":"Growth accelerant or conversion killer?","strengths":["..."],"risks":["..."],"body":"2 paragraphs.","recommendation":"..."},{"num":"08","title":"Product & Technology Moat","score":7,"score_label":"FAIR","finding":"Months until competitor replicates?","strengths":["..."],"risks":["..."],"body":"2 paragraphs.","recommendation":"..."},{"num":"09","title":"Digital Presence & Demand Generation","score":5,"score_label":"FAIR","finding":"Creating demand or consuming budget?","strengths":["..."],"risks":["..."],"body":"2 paragraphs.","recommendation":"..."},{"num":"10","title":"Strategic Priorities & 18-Month Roadmap","score":null,"score_label":"DIRECTIVE","finding":"Single constraint that if removed unlocks everything.","priorities":[{"horizon":"H1","action":"specific action","rationale":"why now","owner":"CEO","success_metric":"specific number"},{"horizon":"H1","action":"...","rationale":"...","owner":"CRO","success_metric":"..."},{"horizon":"H2","action":"...","rationale":"...","owner":"CMO","success_metric":"..."},{"horizon":"H2","action":"...","rationale":"...","owner":"CTO","success_metric":"..."},{"horizon":"H3","action":"...","rationale":"...","owner":"CFO","success_metric":"..."}],"closing_directive":"2 sentences: most important truth and irreversible CEO decision in 30 days."},{"num":"11","title":"Board Dashboard: The Three Numbers","score":null,"score_label":"GOVERNANCE","finding":"What these three numbers prove about the thesis.","board_kpis":[{"metric":"specific KPI","current_baseline":"today estimate","target_90_days":"90-day target","target_12_months":"12-month target","owner":"CRO","why_this_number":"what it proves","red_line_threshold":"floor"},{"metric":"...","current_baseline":"...","target_90_days":"...","target_12_months":"...","owner":"CFO","why_this_number":"...","red_line_threshold":"..."},{"metric":"...","current_baseline":"...","target_90_days":"...","target_12_months":"...","owner":"CEO","why_this_number":"...","red_line_threshold":"..."}],"body":"2 paragraphs on why these metrics and governance cadence."}]}';
+}
+
+function renderSec(s){
+  var h='';
+  if(s.finding)h+='<p class="bp fi">'+esc(s.finding)+'</p>';
+  if(s.investment_thesis){var it=s.investment_thesis,wc=(it.market_window||'').toLowerCase().indexOf('open')===0?'var(--g)':(it.market_window||'').toLowerCase().indexOf('clos')===0?'var(--r)':'var(--am)';h+='<div class="g2x2">';[['Market Context',it.market_context],['Asymmetric Advantage',it.asymmetric_advantage],['Capital Allocation',it.required_capital_allocation],['Outcome — 18 Months',it.outcome_18_months]].forEach(function(p){h+='<div class="box"><div class="boxl">'+p[0]+'</div><p>'+esc(p[1])+'</p></div>';});h+='</div><div class="g2x2"><div class="mw"><div class="mwl">Market Window</div><p style="font-weight:600;color:'+wc+';font-size:12px;">'+esc(it.market_window)+'</p></div><div class="rl"><div class="rll">⚠ Red Line</div><p style="font-size:12px;">'+esc(it.red_line)+'</p></div></div>';}
+  if(s.tam_sam_som){var t=s.tam_sam_som;h+='<div class="g3"><div class="box"><div class="boxl">TAM</div><p>'+esc(t.tam)+'</p></div><div class="box"><div class="boxl">SAM</div><p>'+esc(t.sam)+'</p></div><div class="som"><div class="boxl">SOM — 18-Month</div><p>'+esc(t.som)+'</p></div></div>';if(t.why_now)h+='<p class="bp"><strong style="color:var(--am);">Why Now:</strong> '+esc(t.why_now)+'</p>';if(t.market_window_closes)h+='<p class="bp"><strong style="color:var(--r);">Window Closes:</strong> '+esc(t.market_window_closes)+'</p>';}
+  if(s.unit_economics){var u=s.unit_economics;h+='<div class="g3">';[['LTV/CAC',u.ltv_cac_assessment],['Payback Period',u.payback_period],['Burn Profile',u.burn_profile],['Retention Signal',u.retention_signal],['Switching Costs',u.switching_costs]].forEach(function(p){h+='<div class="box"><div class="boxl">'+p[0]+'</div><p>'+esc(p[1])+'</p></div>';});h+='<div class="mw"><div class="mwl">Capital Efficiency</div><p style="font-weight:600;color:var(--g2);font-size:12px;">'+esc(u.capital_efficiency_verdict)+'</p></div></div>';}
+  if(s.strengths&&s.risks){h+='<div class="fg2"><div class="fc"><div class="fl2 fls">Strengths</div>'+(s.strengths||[]).map(function(x){return'<p>+ '+esc(x)+'</p>';}).join('')+'</div><div class="fc"><div class="fl2 flr">Risks</div>'+(s.risks||[]).map(function(x){return'<p>&#8722; '+esc(x)+'</p>';}).join('')+'</div></div>';}
+  if(s.body)s.body.split(/\n+/).filter(function(x){return x.trim();}).forEach(function(x){h+='<p class="bp">'+esc(x)+'</p>';});
+  if(s.competitors&&s.competitors.length){h+='<table class="ct"><thead><tr><th>Competitor</th><th>Type</th><th>Threat</th><th>Note</th></tr></thead><tbody>';s.competitors.forEach(function(c){h+='<tr><td><strong>'+esc(c.name)+'</strong></td><td>'+esc(c.type)+'</td><td style="color:'+(c.threat==='High'?'var(--r)':c.threat==='Medium'?'var(--am)':'var(--g)')+';font-weight:600;">'+esc(c.threat)+'</td><td>'+esc(c.note)+'</td></tr>';});h+='</tbody></table>';}
+  if(s.from_to&&s.from_to.length){h+='<table class="ct"><thead><tr><th>Current Messaging</th><th>Required Shift</th><th>Rationale</th></tr></thead><tbody>';s.from_to.forEach(function(f){h+='<tr><td style="color:var(--r);">'+esc(f.from)+'</td><td style="color:var(--g);font-weight:600;">'+esc(f.to)+'</td><td>'+esc(f.rationale)+'</td></tr>';});h+='</tbody></table>';}
+  if(s.priorities&&s.priorities.length){h+='<ul class="pl">';s.priorities.forEach(function(p){h+='<li class="pi"><span class="ptg '+(p.horizon==='H1'?'th1':p.horizon==='H2'?'th2':'th3')+'">'+esc(p.horizon)+'</span><div><strong style="color:#060E09;font-size:13px;">'+esc(p.action)+'</strong><br><span style="font-size:12px;color:var(--tx2);">'+esc(p.rationale)+'</span><br><span style="font-size:11px;color:var(--g2);">Owner: '+esc(p.owner)+' &middot; '+esc(p.success_metric)+'</span></div></li>';});h+='</ul>';}
+  if(s.closing_directive)h+='<div class="pq"><p>'+esc(s.closing_directive)+'</p></div>';
+  if(s.board_kpis&&s.board_kpis.length){s.board_kpis.forEach(function(k,i){h+='<div class="kpi"><div class="kpih"><span>KPI '+(i+1)+': '+esc(k.metric)+'</span><span>'+esc(k.owner)+'</span></div><div class="kpig"><div class="kpic"><div class="kpicl">Current</div><div class="kpicv">'+esc(k.current_baseline)+'</div></div><div class="kpic"><div class="kpicl">90-Day</div><div class="kpicv" style="color:var(--g);">'+esc(k.target_90_days)+'</div></div><div class="kpic"><div class="kpicl">12-Month</div><div class="kpicv" style="color:var(--g2);">'+esc(k.target_12_months)+'</div></div><div class="kpic kpirl"><div class="kpicl">Red Line</div><div class="kpicv">'+esc(k.red_line_threshold)+'</div></div></div><div class="kpiw">'+esc(k.why_this_number)+'</div></div>';});}
+  if(s.recommendation)h+='<div class="rc"><div class="rch"><span class="rct">Strategic Recommendation</span><span class="rci">PRIORITY ACTION</span></div><div class="rcb"><p>'+esc(s.recommendation)+'</p></div></div>';
+  var bmap={'MANDATE':'bdg2','DIRECTIVE':'bdb','GOVERNANCE':'bdb'};
+  var badge=(s.score!==null&&s.score!==undefined)?'<span class="bdg '+bc(s.score)+'">'+cl(s.score)+'/10</span>':'<span class="bdg '+(bmap[s.score_label]||'bdb')+'" style="font-size:10px;">'+esc(s.score_label)+'</span>';
+  return '<div class="sec"><div class="sh"><span class="sn">'+esc(s.num)+'</span><h2 class="stl">'+esc(s.title)+'</h2>'+badge+'</div>'+h+'</div>';
+}
+
+function render(data,assessor){
+  var rs=g('rpt');
+  var scores=data.scores||{};
+  var dims=[{k:'market_position',l:'Market<br>Position',d:'Defensibility'},{k:'positioning_clarity',l:'Positioning<br>Clarity',d:'Messaging & ICP'},{k:'gtm_execution',l:'GTM<br>Execution',d:'CAC efficiency'},{k:'product_moat',l:'Product<br>Moat',d:'IP & switching costs'},{k:'commercial_readiness',l:'Commercial<br>Readiness',d:'Scale readiness'}];
+  var sc=dims.map(function(d){var n=cl(scores[d.k]);var rt=n<=3?'Critical':n<=5?'Weak':n<=7?'Fair':n<=8?'Strong':'Excellent';return'<div class="scc"><div class="scd">'+d.l+'</div><div class="scn '+scl(n)+'">'+n+'<span style="font-size:12px;opacity:.5">/10</span></div><div class="scb"><div class="scf '+scf(n)+'" style="width:'+(n*10)+'%"></div></div><div style="font-size:9px;font-weight:700;color:'+rc(n)+';margin-top:4px;text-transform:uppercase;">'+rt+'</div><div style="font-size:9px;color:var(--tx3);margin-top:3px;">'+d.d+'</div></div>';}).join('');
+  var date=data.assessment_date||new Date().toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+  var secs=(data.sections||[]).map(function(s){try{return renderSec(s);}catch(e){return'<div class="sec"><div class="sh"><span class="sn">'+esc(s.num)+'</span><h2 class="stl">'+esc(s.title)+'</h2></div><p class="bp" style="color:var(--r);">Error: '+esc(e.message)+'</p></div>';}}).join('');
+  rs.innerHTML='<div class="cov"><div class="ey">Company Strategy &amp; Marketing Outside-In Assessment &middot; Optivus</div><div class="co">'+esc(data.company)+'</div><div class="ctit">Commercial Intelligence Report</div><div class="mt"><div class="mi"><span class="ml">Date</span><span class="mv">'+esc(date)+'</span></div><div class="mi"><span class="ml">Prepared by</span><span class="mv">'+esc(assessor||'Optivus Strategic Intelligence')+'</span></div><div class="mi"><span class="ml">URL</span><span class="mv" style="font-family:monospace;font-size:11px;">'+esc(data.url)+'</span></div><div class="mi"><span class="ml">Overall Score</span><span class="mv '+scl(data.overall_score)+'" style="font-size:20px;font-weight:700;">'+cl(data.overall_score)+'/10</span></div></div><div class="vd"><div class="vdl">Executive Verdict</div><div class="vdt">'+esc(data.overall_verdict)+'</div></div><div class="scard">'+sc+'</div></div>'+secs;
+}
+
+async function runCalls(name,url,ctx,assessor){
+  try{
+    setS('Analysing investment thesis & profile (1/2)...');
+    var d1=await callAPI(p1(name,url,ctx));
+    setS('Building GTM, priorities & board dashboard (2/2)...');
+    var d2=await callAPI(p2(name,url,ctx));
+    var allSecs=[].concat(d1.sections||[],d2.sections||[]).map(function(s){return Object.assign({},s,{score:s.score===null||s.score===undefined?null:cl(s.score)});});
+    doneProgress();
+    show('sr');
+    render(Object.assign({},d1,{sections:allSecs}),assessor);
+    g('aco').textContent=name+' — Strategic Assessment';
+    g('adt').textContent=new Date().toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+  }catch(e){showErr('Error: '+e.message+'. Tap RETRY to try again.');}
+}
+
+function startAssessment(){
+  var url=g('furl').value.trim(),name=g('fname').value.trim(),ctx=g('fctx').value.trim(),assessor=g('fassesor').value.trim();
+  var apikey=(g('fapikey')?g('fapikey').value.trim():'');
+  var err=g('ierr');
+  if(!url||!name){err.textContent='Please enter both URL and company name.';err.style.display='block';return;}
+  if(apikey) window._apiKey=apikey;
+  if(!window._apiKey){err.textContent='Please enter your Anthropic API key to run the assessment.';err.style.display='block';return;}
+  err.style.display='none';_params={name:name,url:url,ctx:ctx,assessor:assessor};
+  g('lnm').textContent=name;show('sl');runProgress();
+  setTimeout(function(){runCalls(name,url,ctx,assessor).catch(function(e){showErr('Error: '+e.message);});},50);
+}
+
+function startOver(){
+  resetSteps();g('rpt').innerHTML='';g('ierr').style.display='none';g('ebox').style.display='none';show('si');
+}
+
+g('btnRun').addEventListener('click',startAssessment);
+g('btnRetry').addEventListener('click',function(){g('ebox').style.display='none';resetSteps();runProgress();setTimeout(function(){runCalls(_params.name,_params.url,_params.ctx,_params.assessor).catch(function(e){showErr('Error: '+e.message);});},50);});
+g('btnSo1').addEventListener('click',startOver);
+g('btnSo2').addEventListener('click',startOver);
+g('btnPr').addEventListener('click',function(){window.print();});
+g('furl').addEventListener('keydown',function(e){if(e.key==='Enter')startAssessment();});
+g('fname').addEventListener('keydown',function(e){if(e.key==='Enter')startAssessment();});
+</script>
+</body>
+</html>
