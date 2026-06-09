@@ -240,7 +240,7 @@ async function callAPI(prompt,attempt){
     setS('Calling API (attempt '+(attempt+1)+')...');
     var apiKey=window._apiKey||'';
     var reqBody=JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,system:SYSP,messages:[{role:'user',content:prompt}]});
-    var proxyUrl=window._proxyUrl||'https://api.anthropic.com/v1/messages';
+    var proxyUrl=window._proxyUrl||'https://optivus-api.optivusprof.workers.dev';
     var r=await fetch(proxyUrl,{
       method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
@@ -335,6 +335,7 @@ g('btnSo2').addEventListener('click',startOver);
 g('btnPr').addEventListener('click',function(){window.print();});
 g('furl').addEventListener('keydown',function(e){if(e.key==='Enter')startAssessment();});
 g('fname').addEventListener('keydown',function(e){if(e.key==='Enter')startAssessment();});
+window._proxyUrl='https://optivus-api.optivusprof.workers.dev';
 </script>
 </body>
 </html>
