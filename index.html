@@ -235,7 +235,7 @@ async function callAPI(prompt,attempt){
   try{
     setS('Calling API (attempt '+(attempt+1)+')...');
     var apiKey=window._apiKey||'';
-    var reqBody=JSON.stringify({model:'claude-3-5-sonnet-20241022',max_tokens:8000,system:SYSP,messages:[{role:'user',content:prompt}]});
+    var reqBody=JSON.stringify({model:'claude-3-opus-20240229',max_tokens:8000,system:SYSP,messages:[{role:'user',content:prompt}]});
     var proxyUrl='https://optivus-api.optivusprof.workers.dev';
     var r=await fetch(proxyUrl,{
       method:'POST',
