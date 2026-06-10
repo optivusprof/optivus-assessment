@@ -146,7 +146,11 @@ textarea.inp{resize:vertical;min-height:60px;}
       <input class="inp" type="password" id="fapikey" placeholder="sk-ant-api03-..." autocomplete="off">
       <div style="font-size:11px;color:var(--tx3);margin-top:4px;">Used only for this session, never stored.</div>
     </div>
-
+    <div class="fl">
+      <label class="lbl">Cloudflare Worker URL <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--tx3);">— your CORS proxy</span></label>
+      <input class="inp" type="text" id="fproxyurl" placeholder="https://optivus-api.YOURNAME.workers.dev" autocomplete="off">
+      <div style="font-size:11px;color:var(--tx3);margin-top:4px;">Set up once — see setup instructions above.</div>
+    </div>
     <button class="btn-run" id="btnRun">RUN STRATEGIC ASSESSMENT →</button>
     <div class="ierr" id="ierr"></div>
   </div>
@@ -235,8 +239,8 @@ async function callAPI(prompt,attempt){
   try{
     setS('Calling API (attempt '+(attempt+1)+')...');
     var apiKey=window._apiKey||'';
-    var reqBody=JSON.stringify({model:'claude-3-5-sonnet-20241022',max_tokens:8000,system:SYSP,messages:[{role:'user',content:prompt}]});
-    var proxyUrl='https://optivus-api.optivusprof.workers.dev';
+    var reqBody=JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,system:SYSP,messages:[{role:'user',content:prompt}]});
+    var proxyUrl=window._proxyUrl||'https://optivus-api.optivusprof.workers.dev';
     var r=await fetch(proxyUrl,{
       method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
@@ -309,6 +313,8 @@ async function runCalls(name,url,ctx,assessor){
 function startAssessment(){
   var url=g('furl').value.trim(),name=g('fname').value.trim(),ctx=g('fctx').value.trim(),assessor=g('fassesor').value.trim();
   var apikey=(g('fapikey')?g('fapikey').value.trim():'');
+  var proxyurl=(g('fproxyurl')?g('fproxyurl').value.trim():'');
+  if(proxyurl) window._proxyUrl=proxyurl;
   var err=g('ierr');
   if(!url||!name){err.textContent='Please enter both URL and company name.';err.style.display='block';return;}
   if(apikey) window._apiKey=apikey;
@@ -329,6 +335,7 @@ g('btnSo2').addEventListener('click',startOver);
 g('btnPr').addEventListener('click',function(){window.print();});
 g('furl').addEventListener('keydown',function(e){if(e.key==='Enter')startAssessment();});
 g('fname').addEventListener('keydown',function(e){if(e.key==='Enter')startAssessment();});
+window._proxyUrl='https://optivus-api.optivusprof.workers.dev';
 </script>
 </body>
 </html>
